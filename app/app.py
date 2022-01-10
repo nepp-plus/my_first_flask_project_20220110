@@ -7,9 +7,13 @@ def create_app():
     # 서버에 대한 세팅 진행
     
     @app.route("/")  # 만들고있는 서버의 / (아무것도 안붙인주소) 로 접속하면 보여줄 내용
-    def test():
+    def home():
         # return 내용 : HTML 등 웹 프론트엔드 태그.
         return "<h1>Hello World!!</h1>"  # Hello World 문장 리턴 => 이 내용을 사용자에게 보여주겠다.
+    
+    @app.route("/test")
+    def test(): 
+        return "이 곳은 테스트 페이지 입니다."
     
     # 이 서버를 사용하도록 결과로 내보내자.
     return app
