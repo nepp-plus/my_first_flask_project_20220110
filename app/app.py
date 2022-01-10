@@ -28,6 +28,14 @@ def create_app():
         # 아이디 : login_id 이름표를 뽑아서 사용.
         # 비번 : pw 이름표로 뽑아서 사용.
         
+        # 원하는 파라미터가 안들어왔다면? => 잘못보냈다고 알려주는 코드 추가.
+        # dict의 key값의 데이터 실제 존재?
+        if 'login_id' not in params.keys() or 'pw' not in params.keys():
+            return {
+                'code': 400,
+                'message': 'login_id / pw 중 하나가 첨부되지 않았습니다.'
+            }
+        
         id = params['login_id']
         pw = params['pw']
         
