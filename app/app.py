@@ -11,7 +11,7 @@ def create_app():
         # return 내용 : HTML 등 웹 프론트엔드 태그.
         return "<h1>Hello World!!</h1>"  # Hello World 문장 리턴 => 이 내용을 사용자에게 보여주겠다.
     
-    @app.route("/test")
+    @app.route("/test") # 서버의 /test 주소로 오면 수행해줄 일을 작성.
     def test(): 
         return "이 곳은 테스트 페이지 입니다."
     
