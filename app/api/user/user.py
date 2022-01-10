@@ -105,7 +105,19 @@ def sign_up(params):
     cursor.execute(sql)
     db.commit()
     
+    sign_up_user_sql = f"SELECT * FROM users ORDER BY id DESC LIMIT 1"
+    cursor.execute(sign_up_user_sql)
+    sign_up_user = cursor.fetchone()
+    
     return {
-        'test': 'test'
+        'code': 200,
+        'message': '회원가입 성공',
+        'data': {
+            'user': {
+                'id': sign_up_user['id'],
+                'email': sign_up_user['email'],
+                'nickname': sign_up_user['nickname'],
+            }
+        }
     }
     
