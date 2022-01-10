@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask.templating import render_template
 
-from .api import user_test
+from .api import user_test, login_test
 
 def create_app():
     # 플라스크 서버를 변수에 담자.
@@ -17,6 +17,10 @@ def create_app():
     @app.route('/module_test')
     def module_test():
         return user_test() # 다른 모듈의 함수의 실행결과를 내보내자. => 로직을, 다른 모듈에서만 작성하면 됨.
+    
+    @app.route('/login_test')
+    def login_01():
+        return login_test( 'admin', 'qwer' )
     
     # 이 서버를 사용하도록 결과로 내보내자.
     return app

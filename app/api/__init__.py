@@ -1,1 +1,1 @@
-from .user.user import user_test
+from .user.user import user_test, login_test
