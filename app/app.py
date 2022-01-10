@@ -18,7 +18,7 @@ def create_app():
     
     @app.route("/web")
     def web_test():
-        return render_template('web_test.html')
+        return render_template('web_test.html')  # templates 폴더 내부의 파일을 불러주는 역할.
     
     # 이 서버를 사용하도록 결과로 내보내자.
     return app
