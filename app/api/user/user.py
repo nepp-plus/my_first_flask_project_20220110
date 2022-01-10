@@ -64,11 +64,17 @@ def login_test(id, pw):
     
     
 # 회원가입 담당 함수
+# 1. 이메일이 이미 사용중이라면? -> 400으로 에러처리.
+# 2. 닉네임도 사용중이라면? -> 400으로 에러처리.
+# 둘다 통과 해야만 실제 INSERT INTO -> 결과를 200으로 내려주자. + 가입된 사용자 정보도 내려주자.
 
 def sign_up(params):
     sql = f"INSERT INTO users (email, password, nickname) VALUES ('{params['email']}', '{params['pw']}', '{params['nick']}');"
     
     print(f'완성된 쿼리 : {sql}')
+    
+    cursor.execute(sql)
+    db.commit()
     
     return {
         'test': 'test'
