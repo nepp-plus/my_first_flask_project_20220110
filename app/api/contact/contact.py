@@ -68,7 +68,7 @@ def get_contacts_from_db(params):
         
         # datetime으로 오는 데이터를 -> str로 가공해서 담아보자.
         # datetime -> str : strftime 활용. (2022-01-08 01:01:00 양식)
-        contact['created_at'] = row['created_at'].strftime('%Y-%m-%d %H:%M:%S')
+        contact['created_at'] = str(row['created_at'])
         # 내용이 채워진 contact를 리스트에 추가
         contacts_arr.append(contact) 
     
