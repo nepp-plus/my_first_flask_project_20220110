@@ -31,22 +31,39 @@ def user_test():
 def login_test(id, pw):
     # id, pw을 이용해서 -> SQL 쿼리 작성 -> 결과에 따라 다른 응답 리턴.
     
+    # 이메일부터 있는지 검사. => 이메일이 없다면 -> "존재하지 않는 이메일입니다."  message string으로 담아서 리턴. (400)
+    
+    # 이메일이 있다면? 추가 검사.
+    # 비밀번호도 맞는지 추가 검사. => 비번이 맞다 : 200 - 누가 로그인 했는지. (지금처럼 응답)
+    #   => 비번이  틀리다 : 이메일은 존재하는데, 비번만 틀리다. -> "비밀번호가 틀렸습니다." message string으로 담아서 리턴. (400)
+    
+    sql = f"SELECT * FROM users WHERE email='{id}'"
+    cursor.execute(sql)
+    
+    query_result = cursor.fetchone()
+    
+    if query_result == None:
+        # 아이디부터 존재하지 않는 상황
+        return {
+            'code': 400,
+            'message': '존재하지 않는 이메일입니다.'
+        }, 400
+    
     sql = f"SELECT * FROM users WHERE email='{id}' AND password='{pw}'"
     cursor.execute(sql)
     
     query_result = cursor.fetchone()  # 검색결과 없으면, None 리턴. 검색 결과 있다면, 그 사용자의 정보를 담은 dict
     
-    # 쿼리 결과 : None -> 아이디 비번 맞는 사람 X -> 로그인 실패.
+    # 쿼리 결과 : None -> 아이디가 틀린경우 -> 이전의 return으로 결과가 나갔을 것임.
+    # 지금의 None : 아이디는 있지만, 비번이 틀린걸로 간주.
     if query_result == None:
         return {
             'code': 400,
-            'message': '아이디 또는 비번이 잘못되었습니다.'
+            'message': '비밀번호가 잘못되었습니다.'
         }, 400
     else:
         # 검색 결과 있다 => 아이디/비번 모두 맞는 사람 O -> 로그인 성공.
         #  query_result 가 실체가 있다. (None이 아니다) => 앱에서 사용 가능한 JSONObject로 보내보자.
-        
-        print(query_result)
         
         user_dict = {
             'id': query_result['id'],
