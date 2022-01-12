@@ -40,3 +40,9 @@ def add_contact_to_db(params):
         'code': 200,
         'message': '연락처 등록 성공',
     }
+    
+def get_contacts_from_db(params):
+    # 기본 : 해당 사용자의 모든 연락처를 목록으로 리턴.
+    # 응용1 : 파라미터에 최신순/이름순 정렬 순서를 받자. => 그에 맞게 리턴.
+    # 응용2 : 한번에 10개씩만 내려주자. (게시판처럼 페이징 처리)
+    pass
