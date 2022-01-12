@@ -112,14 +112,16 @@ def search_contact(params):
     
     search_list = cursor.fetchall()
     
+    contacts = []
+    
     for row in search_list:
         contact = Contacts(row) # DB에서 추출한 row dict -> 모델 클래스인 Contacts 객체로 변환.
-        print(contact)
+        contacts.append( contact.get_data_object() ) 
     
     return {
         'code': 200,
         'message': 'search complete',
-        # 'data': {
-        #     'contacts' : 
-        # }
+        'data': {
+            'contacts' :  contacts
+        }
     }
