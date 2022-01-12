@@ -53,15 +53,11 @@ def get_contacts_from_db(params):
     if 'order_type' in params.keys():
         order_type = params['order_type']
         if order_type == '최신순':
-            sql = '최신순 쿼리'
+            sql = f"{sql} ORDER BY created_at DESC"  # 기존 쿼리 뒤에, ORDER BY created_at DESC 추가
         elif order_type == '이름순':
-            sql = '이름순 쿼리'
+            sql = f"{sql} ORDER BY name" # 기존 쿼리 뒤에, ORDER BY name  추가
         
     print(sql)
-    
-    return {
-        '임시응답': '임시값'
-    }
     
     cursor.execute(sql)
     
